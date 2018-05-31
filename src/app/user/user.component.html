@@ -1,0 +1,28 @@
+<div class="row">
+  <h3>{{ loginSuccessMsg }}</h3>
+
+  <p class="bg-success" *ngIf="userGiftStatus; else lowrating">You have been rated {{ 'valuable' }} to us, as you have been rated
+    <strong>5 stars</strong>. Claim your gift now.
+  </p>
+
+  <ng-template #lowrating>
+    <p class="bg-danger">Seems you have been rated low.</p>
+  </ng-template>
+
+  <h4>You have claimed {{giftCount}} gifts</h4>
+</div>
+
+<div class="row">
+  <div class="col-md-3 form-group">Add a gift of your choice:</div>
+  <div class="col-md-9">
+    <input type="text" class="form-control" trim [(ngModel)]="userGiftName"/>
+  </div>
+  <div class="col-md-12">
+    <app-gift *ngFor="let gift of gifts; let i = index;" 
+    [ngClass]="i > 0? 'green-text' : 'red-text'" [giftElement]="gift" 
+    [count]="giftCount" (giftClaimed)="onGiftClaim($event)"></app-gift>
+  </div> 
+</div>
+<div class="row">
+  <button class="btn" (click)="onAddGift();">Add Gift</button>
+</div>
