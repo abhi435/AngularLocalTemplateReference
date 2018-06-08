@@ -15,7 +15,11 @@
 <div class="row">
   <div class="col-md-3 form-group">Add a gift of your choice:</div>
   <div class="col-md-9">
-    <input type="text" class="form-control" trim [(ngModel)]="userGiftName"/>
+    <input type="text" class="form-control" trim #giftName />
+  </div>
+  <div class="col-md-3 form-group">Set your Nick Name:</div>
+  <div class="col-md-9">
+    <input type="text" class="form-control" trim #nickName />
   </div>
   <div class="col-md-12">
     <app-gift *ngFor="let gift of gifts; let i = index;" 
@@ -24,5 +28,5 @@
   </div> 
 </div>
 <div class="row">
-  <button class="btn" (click)="onAddGift();">Add Gift</button>
+  <button class="btn" (click)="onAddGift(giftName)">Add Gift</button>
 </div>

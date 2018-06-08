@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Gift } from '../gift/gift.component';
 
 @Component({
@@ -15,6 +15,8 @@ export class UserComponent implements OnInit {
   userComment = 'Sample Message';
   userGiftName = '';
   giftCount: number = 0;
+  @ViewChild('nickName') nickName : ElementRef;
+  userNickName: String = '';
   
   gifts = [{giftName: 'Toaster'}];
   
@@ -39,7 +41,9 @@ export class UserComponent implements OnInit {
     return this.userGiftClaimed ? 'green' : 'red'; 
   }
 
-  onAddGift() {
+  onAddGift(giftName: HTMLInputElement) {
+    this.userGiftName = giftName.value;
+
     if (this.userGiftName == '') {
       this.userGiftMsg='Gift name cannot be blank';
       return;
@@ -48,6 +52,9 @@ export class UserComponent implements OnInit {
     this.gifts.push({
       giftName: this.userGiftName
     });
+
+    this.userNickName = this.nickName.nativeElement.value;
+    alert('Thanks '+ this.userNickName + '. We truly admire your choice.');
     
   }
 
